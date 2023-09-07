@@ -1,0 +1,168 @@
+/**
+* This file is part of OSMAP.
+*
+* Copyright (C) 2018-2019 Alejandro Silvestri <alejandrosilvestri at gmail>
+* For more information see <https://github.com/AlejandroSilvestri/osmap>
+*
+* OSMAP is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* OSMAP is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with OSMAP. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
+OSMAP: Map serialization structure definition, for ORB-SLAM2.
+Messages are ORB-SLAM2 objects minimal serialization.  They ommit not used properties: those effimeral and those that can be regenerated.
+Repeated fields can be ommited.  Their ommission can compromise the map integrity.
+*/
+
+syntax = "proto3";
+
+// 256 bits descriptor: 32 bytes, 8 uint32.  Exactly 8 fixed32 required.
+message SerializedDescriptor{
+  repeated fixed32 block = 1;
+}
+
+// Pose, first 12 elements in an homogeneous 4x4 pose matrix. Exactly 12 float required.
+message SerializedPose{
+  repeated float element = 1;
+}
+
+
+// 3x1 Mat 3D position, all 3 fields required.
+message SerializedPosition{
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+//  KeyPoint, all 4 fields required.
+message SerializedKeypoint{
+  float ptx    = 1;
+  float pty    = 2;
+  float angle  = 3;
+  float octave = 4;
+}
+
+// Intrinsic matrix K, all 4 fields required.
+message SerializedK{
+  float fx = 1;
+  float fy = 2;
+  float cx = 3;
+  float cy = 4;
+}
+
+message SerializedKArray{
+  repeated SerializedK k = 1;
+}
+
+message SerializedEllipsoid {
+  repeated float element = 1; // 4x4 matrix
+}
+
+// MapPoint, all fields optional, should provide position at least.
+message SerializedMappoint{
+  uint32 id                       = 1;  // mnId
+  SerializedPosition position     = 2;  // mWorldPos
+  float visible                   = 3;  // mnVisible
+  float found                     = 4;  // mnFound
+  SerializedDescriptor briefdescriptor = 5;  // mDescriptor, very optional.  This field is named briefdescriptor instead of descriptor because the latter es a reserved word in protocol buffers.
+}
+
+message SerializedMappointArray{
+  repeated SerializedMappoint mappoint = 1;
+}
+
+// MapObject, all fields optional, should provide position at least.
+message SerializedObject{
+  SerializedEllipsoid ellipsoid   = 1;  // ellipsoid
+  uint32 object_id          = 2;  // id of the track
+}
+
+message SerializedObjectArray{
+  repeated SerializedObject object = 1;
+}
+
+
+message SerializedBBox2{
+  float xmin = 1;
+  float ymin = 2;
+  float xmax = 3;
+  float ymax = 4;
+}
+
+// ADDED FOR GRAPH
+
+message SerializedNode{
+  uint32 node_id = 1;
+  uint32 category_id = 2;
+  repeated uint32 neighbours_ids = 3;
+  uint32 object_id = 4;
+  SerializedBBox2 bbox = 5;
+}
+
+message SerializedGraph{
+  repeated SerializedNode node = 1;
+}
+
+message SerializedGraphArray{
+  repeated SerializedGraph graph = 1;
+}
+
+// ObjectTrack, all fields optional, should provide position at least.
+message SerializedObjectTrack{
+  uint32 id                         = 1;  // id of the track
+  uint32 cat                        = 2;
+  uint32 last_frame_id              = 3;
+  uint32 color_r                    = 4;
+  uint32 color_g                    = 5;
+  uint32 color_b                    = 6;
+  uint32 status                     = 7;
+  repeated SerializedBBox2 kf_bboxes = 8;
+  repeated uint32 kf_indices        = 9;
+  repeated double kf_scores = 10;
+}
+
+message SerializedObjectTrackArray{
+  repeated SerializedObjectTrack objecttrack = 1;
+}
+
+// KeyFrame, all fields optional, should provide pose at least.
+message SerializedKeyframe{
+  uint32 id             		= 1;  // mnId
+  SerializedPose pose   		= 2;  // mTcw
+  SerializedK kmatrix			= 3;  // K matrix, alternative to index k
+  uint32 kindex         		= 4;  // index to matrix list K, ignored if kmatrix is present
+  repeated uint32 loopedgesids 	= 5;  // indexes to keyframes connected in a loop
+  double timestamp				= 6;  // Time stamp
+}
+
+message SerializedKeyframeArray{
+  repeated SerializedKeyframe keyframe = 1;
+}
+
+
+// One observed feature in a keyframe.
+message SerializedFeature{
+  uint32 mappoint_id              = 2;  // mappoint id used to construct mvpMapPoints
+  SerializedKeypoint keypoint     = 3;  // element of mvKeysUn
+  SerializedDescriptor briefdescriptor = 4;  // row of mDescriptors.  This field is named briefdescriptor instead of descriptor because the latter es a reserved word in protocol buffers.
+}
+
+// All observed features in a keyframe.  keyframe_id required.
+message SerializedKeyframeFeatures{
+  uint32 keyframe_id         = 1;  // kfId, keyframe id
+  repeated SerializedFeature feature = 2;
+}
+
+message SerializedKeyframeFeaturesArray{
+  repeated SerializedKeyframeFeatures feature = 1;
+}
