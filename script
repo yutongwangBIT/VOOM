@@ -2,8 +2,11 @@ sh build.sh
 
 cd /bin
 
+<<<<<<< HEAD
 ./rgbd_tum_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/TUM2.yaml /home/yutong/data/rgbd_dataset_freiburg2_desk ../Data/fr2_desk/fr2_desk.txt ../Data/fr2_desk/detections_yolov8x_seg_tum_rgbd_fr2_desk_with_ellipse.json null points fr2
 
+=======
+>>>>>>> 3147a93da8ef989f8e3c4b8b2c6dd70bb07e5c82
 ./rgbd_tum_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/TUM2.yaml /home/yutong/data/rgbd_dataset_freiburg2_desk_with_person ../Data/fr2_person/fr2_person_associated.txt ../Data/fr2_person/detections_yolov8x_seg_fr2_person_with_ellipse.json points fr2_person
 
 ./rgbd_tum_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/TUM3.yaml /home/yutong/data/rgbd_dataset_freiburg3_long_office_household ../Data/fr3/fr3_office.txt ../Data/fr3/detections_yolov8x_seg_fr3_office_with_ellipse.json points fr3
