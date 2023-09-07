@@ -1,0 +1,26 @@
+sh build.sh 
+
+cd /bin
+
+./rgbd_tum_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/TUM2.yaml /home/yutong/data/rgbd_dataset_freiburg2_desk_with_person ../Data/fr2_person/fr2_person_associated.txt ../Data/fr2_person/detections_yolov8x_seg_fr2_person_with_ellipse.json points fr2_person
+
+./rgbd_tum_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/TUM3.yaml /home/yutong/data/rgbd_dataset_freiburg3_long_office_household ../Data/fr3/fr3_office.txt ../Data/fr3/detections_yolov8x_seg_fr3_office_with_ellipse.json points fr3
+
+
+./rgbd_tum_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/TUM3.yaml /home/yutong/data/rgbd_dataset_freiburg3_teddy ../Data/fr3_teddy/rgbd_dataset_freiburg3_teddy_associated.txt ../Data/fr3_teddy/detections_yolov8x_seg_fr3_teddy_with_ellipse.json points fr3_teddy
+
+
+./rgbd_tum_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/TUM1.yaml /home/yutong/data/rgbd_dataset_freiburg1_desk ../Data/fr1_desk/fr1_desk.txt ../Data/fr1_desk/detections_yolov8x_seg_fr1_desk_with_ellipse.json points fr1_desk
+
+./rgbd_tum_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/TUM1.yaml /home/yutong/data/rgbd_dataset_freiburg1_desk2 ../Data/fr1_desk2/fr1_desk2.txt ../Data/fr1_desk2/detections_yolov8x_seg_fr1_desk2_with_ellipse.json points fr1_desk2
+
+
+./rgbd_diamond_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/diamond_walk.yaml /home/yutong/data/diamond_ground_robot_for_test ../Data/diamond_ground/diamond_ground_robot_associated.txt ../Data/diamond_ground/detections_yolov8x_seg_diamond_ground_robot_with_ellipse.json points diamond_ground
+
+./rgbd_diamond_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/diamond_vr_slow.yaml /home/yutong/data/diamond_vr_slow_for_test ../Data/diamond_vr_slow/diamond_vr_slow_associated.txt ../Data/diamond_vr_slow/detections_yolov8x_seg_diamond_vr_slow_with_ellipse.json points diamond_vr_slow
+
+./rgbd_diamond_with_ellipse ../Vocabulary/ORBvoc.txt ../Cameras/diamond_walk.yaml /home/yutong/data/diamond_dji_for_test ../Data/diamond_dji/diamond_dji_associated.txt ../Data/diamond_dji/detections_yolov8x_seg_diamond_dji_with_ellipse.json points diamond_dji
+
+
+
+
