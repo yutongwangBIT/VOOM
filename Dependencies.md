@@ -1,7 +1,7 @@
 ##List of Known Dependencies
-###ORB-SLAM2 version 1.0
+###VOOM version 1.0
 
-In this document we list all the pieces of code included  by ORB-SLAM2 and linked libraries which are not property of the authors of ORB-SLAM2.
+In this document we list all the pieces of code included by VOOM and linked libraries that are not the property of the authors of VOOM.
 
 
 #####Code in **src** and **include** folders
@@ -17,6 +17,12 @@ This code can be found in popular BSD licensed computer vision libraries as [Ope
 The code is from: http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetParallel.
 The code is in the public domain.
 
+* *Viewer.h, Viewer.cc, Framedrawer.cc, Framedrawer.h, Mapdrawer.cc, Mapdrawer.h*
+  This is a modified version based on ORB SLAM2 and OA-SLAM.
+
+* *Tracking.h, Tracking.cc, LocalMapping.h, LocalMapping.cc, System.h, System.cc*
+  This is a modified version based on ORB SLAM2
+
 #####Code in Thirdparty folder
 
 * All code in **DBoW2** folder.
@@ -24,6 +30,12 @@ This is a modified version of [DBoW2](https://github.com/dorian3d/DBoW2) and [DL
 
 * All code in **g2o** folder.
 This is a modified version of [g2o](https://github.com/RainerKuemmerle/g2o). All files included are BSD licensed.
+
+* Code in **Json** folder.
+This is an unchanged version of [Json](https://github.com/nlohmann/json). Their licenses include Apache BSD GPLv3 and MIT.
+
+* Code in **Osmap** folder.
+This is a modified version of [Osmap](https://github.com/AlejandroSilvestri/osmap). All files included are GPLv3 licensed.
 
 #####Library dependencies 
 
@@ -36,8 +48,6 @@ BSD license.
 * **Eigen3**.
 For versions greater than 3.1.1 is MPL2, earlier versions are LGPLv3.
 
-* **ROS (Optional, only if you build Examples/ROS)**.
-BSD license. In the manifest.xml the only declared package dependencies are roscpp, tf, sensor_msgs, image_transport, cv_bridge, which are all BSD licensed.
 
 
 
