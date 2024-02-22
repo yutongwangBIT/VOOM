@@ -56,9 +56,11 @@ VOOM is released under a [GPLv3](https://github.com/yutongwangBIT/VOOM/blob/main
 
 ## Citation
 If you use VOOM in an academic work, please cite our paper:
+
 	@inproceedings{wang2024icra,
 		author = {Yutong Wang and Chaoyang Jiang and Xieyuanli Chen},
 		title = {{VOOM: Robust Visual Object Odometry and Mapping using Hierarchical Landmarks}},
 		booktitle = {Proc. of the IEEE Intl. Conf. on Robotics \& Automation (ICRA)},
 		year = 2024
 	}
+ 
